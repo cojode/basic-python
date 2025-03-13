@@ -44,7 +44,7 @@ class LinkedList:
     def _raise_if_corrupted(self):
         if self.head and not self.tail:
             raise CorruptedLinkedListError("no tail in a non-empty list")
-        # ? cycle detection could be also introduced here
+        # ? cycle detection could be introduced here
 
     def add_obj(self, obj: ObjList):
         """Append an ObjList object to the end of the sequence.
@@ -52,6 +52,7 @@ class LinkedList:
         :param obj: object to add
         :type obj: ObjList
         :raises CorruptedLinkedListError: there is no tail in a sequence currently
+        :raises TypeError: obj is not an instance of ObjList
         """
 
         self._raise_if_corrupted()
