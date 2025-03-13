@@ -27,8 +27,8 @@
 Методы LinkedList:
 
 - add_obj(self, obj:  ObjList)
-- remove_obj(self, obj:  ObjList)
-- get_data(self, obj:  ObjList)
+- remove_obj(self)
+- get_data(self)
 
 Публичные атрибуты LinkedList:
 
