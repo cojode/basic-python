@@ -1,6 +1,9 @@
 from typing import Self
 
 
+class CorruptedLinkedListError(Exception): ...
+
+
 class ObjList:
     __slots__ = ("__next", "__prev", "__data")
 
@@ -38,23 +41,48 @@ class LinkedList:
         self.head: ObjList = None
         self.tail: ObjList = None
 
+    def _raise_if_corrupted(self):
+        if self.head and not self.tail:
+            raise CorruptedLinkedListError("no tail in a non-empty list")
+        # ? cycle detection could be also introduced here
+
     def add_obj(self, obj: ObjList):
+        """Append an ObjList object to the end of the sequence.
+
+        :param obj: object to add
+        :type obj: ObjList
+        :raises CorruptedLinkedListError: there is no tail in a sequence currently
+        """
+
+        self._raise_if_corrupted()
+
+        if not isinstance(obj, ObjList):
+            raise TypeError("obj must be an instance of ObjList")
+
         if not self.head:
             # ? first item in a list
             self.head = obj
             self.tail = obj
-        elif not self.tail:
-            raise ValueError("no tail in a non-empty list")
         else:
             self.tail.set_next(obj)
             obj.set_prev(self.tail)
             self.tail = obj
 
-    def remove_obj(self):
+        # ? cycle prevention
+        obj.set_next(None)
+
+    def remove_obj(self) -> ObjList:
+        """Pops last object from the sequence.
+
+        :raises IndexError: pop from empty list
+        :raises CorruptedLinkedListError: there is no tail in a sequence currently
+        """
+        self._raise_if_corrupted()
+
         if not self.head:
             raise IndexError("remove from empty list")
-        if not self.tail:
-            raise ValueError("no tail in a non-empty list")
+
+        discarded_tail = self.tail
 
         new_tail = self.tail.get_prev()
         if new_tail:
@@ -67,7 +95,16 @@ class LinkedList:
         # ? apply new tail
         self.tail = new_tail
 
+        return discarded_tail
+
     def get_data(self) -> list:
+        """Returns a sequence item's data in a list.
+
+        :return: list of data values
+        :rtype: list
+        """
+        self._raise_if_corrupted()
+
         current = self.head
         container = []
         while current:
