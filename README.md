@@ -4,12 +4,12 @@
 
 ### 1. Doubly linked list
 
-[README](doubly_linked_list/doubly_linked_list.py)
+[Source](doubly_linked_list/doubly_linked_list.py)
 
 ### 2. Minesweeper
 
-[README](minesweeper/minesweeper.py)
+[Source](minesweeper/minesweeper.py)
 
 ### 3. Local network
 
-[README](local_network/local_network.py)
+[Source](local_network/local_network.py)
