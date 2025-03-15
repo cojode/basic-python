@@ -1,13 +1,20 @@
 class Data:
+    __slots__ = ("data", "ip")
+
     def __init__(self, data: str, ip: int):
         self.data = data
         self.ip = ip
+
+    def __str__(self):
+        return f"{self.data} ({self.ip})"
 
 
 class ServerError(Exception): ...
 
 
 class Server:
+
+    __slots__ = ("ip", "buffer", "connected_router")
     _base_ip_address: int = 1
 
     def __init__(self):
@@ -48,6 +55,8 @@ class Server:
 
 
 class Router:
+
+    __slots__ = ("buffer", "mapped_servers")
     def __init__(self):
         self.buffer: list[Data] = []
         self.mapped_servers: dict[int, Server] = {}

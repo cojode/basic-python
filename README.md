@@ -1,13 +1,15 @@
-# Basic python practice
+# Basic python
 
-## 1. Doubly linked list
+## Practice
 
-[README](doubly_linked_list/README.md)
+### 1. Doubly linked list
 
-## 2. Minesweeper
+[README](doubly_linked_list/doubly_linked_list.py)
 
-[README](minesweeper/README.md)
+### 2. Minesweeper
 
-## 3. Local network
+[README](minesweeper/minesweeper.py)
 
-[README](local_network/README.md)
+### 3. Local network
+
+[README](local_network/local_network.py)
